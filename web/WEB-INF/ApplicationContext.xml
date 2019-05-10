@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="atest"/>
+        <property name="password" value="Root1234"/>
+        <property name="url" value="jdbc:mysql://rm-bp19r2qb38d2ma890eo.mysql.rds.aliyuncs.com:3306/repaire_db"/>
+    </bean>
+</beans>
