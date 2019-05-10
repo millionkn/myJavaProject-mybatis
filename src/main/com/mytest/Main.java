@@ -8,6 +8,6 @@ public class Main {
     @RequestMapping("/")
     public String main() {
         System.out.println("test");
-        return "/首页.jsp";
+        return "forward:首页.html";
     }
 }
