@@ -3,8 +3,9 @@ package com.mytest.controller;
 import com.mytest.mapper.TestMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Controller("/")
 public class Main {
@@ -16,9 +17,9 @@ public class Main {
         return "forward:首页.html";
     }
 
-    @RequestMapping("/测试")
+    @RequestMapping(value = "/测试",method = RequestMethod.POST)
     @ResponseBody()
-    public String test() {
+    public String test(@RequestParam Map<String,String> map,@RequestBody String body) {
         return "测试啊啊啊";
     }
 }

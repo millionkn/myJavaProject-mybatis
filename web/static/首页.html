@@ -5,6 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    axios("/测试",{
+        method:"post",
+        params:{
+            "中文param":"param内容"
+        },
+        data:{
+            "中文data":"data内容"
+        }
+    })
+</script>
 </body>
 </html>
