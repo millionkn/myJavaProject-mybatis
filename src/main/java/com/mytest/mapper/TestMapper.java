@@ -6,5 +6,8 @@ import org.apache.ibatis.annotations.Select;
 
 public interface TestMapper {
     @Select("select * from test where id=#{id}")
-    public Test selectById(@Param("id") int id);
+    Test selectById(@Param("id") int id);
+
+    @Select("select id from test where id=#{id}")
+    Integer selectId(@Param("id") int id);
 }

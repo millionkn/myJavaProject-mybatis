@@ -7,7 +7,7 @@
 <body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    axios("/测试",{
+    axios("/loginIn").then(() = > axios("/测试1", {
         method:"post",
         params:{
             "中文param":"param内容"
@@ -15,7 +15,18 @@
         data:{
             "中文data":"data内容"
         }
-    })
+    });
+    ).then(() = > axios("/测试2", {
+        method: "post",
+        params: {
+            "中文param": "param内容"
+        },
+        data: {
+            "中文data": "data内容"
+        }
+    });
+    ).catch(() = > axios("/loginOut");
+    )
 </script>
 </body>
 </html>
