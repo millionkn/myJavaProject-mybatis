@@ -1,48 +1,28 @@
 package com.mytest.controller;
 
+import com.mytest.Entries.User;
+import com.mytest.dao.UserDao;
 import com.mytest.permission.PermisssionUtils;
-import com.mytest.permission.ResourceAs;
+import com.mytest.permission.error.DuplicateEntries;
+import com.mytest.permission.error.PasswordWrong;
+import com.mytest.permission.error.UserNotExist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Map;
-
-@Controller("/")
+@Controller("root")
 public class Main {
     @Autowired
     PermisssionUtils utils;
-    @RequestMapping("/")
-    public String main() {
-        return "forward:首页.html";
-    }
+    @Autowired
+    UserDao userDao;
 
-    @RequestMapping(value = "/测试1", method = RequestMethod.POST)
+    @RequestMapping(value = "/login")
     @ResponseBody()
-    @ResourceAs("测试资源1")
-    public String test1(@RequestParam Map<String, String> map, @RequestBody String body) {
-        System.out.println("访问测试1");
-        return "测试啊啊啊";
-    }
-
-    @RequestMapping(value = "/测试2", method = RequestMethod.POST)
-    @ResponseBody()
-    @ResourceAs("测试资源2")
-    public String test2(@RequestParam Map<String, String> map, @RequestBody String body) {
-        System.out.println("访问测试2");
-        return "测试啊啊啊";
-    }
-
-    @RequestMapping(value = "/loginIn")
-    @ResponseBody()
-    public String loginIn() {
-        try {
-            utils.loginIn("user1", "password");
-            System.out.println("用户登录");
-            return "";
-        } catch (Exception e) {
-            return e.getClass().getName();
-        }
+    public User loginIn(@RequestBody() LoginInfo info) throws UserNotExist, PasswordWrong, DuplicateEntries {
+        return userDao.select(utils.loginIn(info.getUsername(), info.getPassword()));
     }
 
     @RequestMapping(value = "/loginOut")
@@ -51,5 +31,10 @@ public class Main {
         utils.loginOut();
         System.out.println("用户退出");
         return "";
+    }
+
+    @RequestMapping("/")
+    public String main() {
+        return "forward:index.html";
     }
 }

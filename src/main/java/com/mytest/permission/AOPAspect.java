@@ -23,7 +23,6 @@ public class AOPAspect {
             }
         }
     }
-
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     private static class UNAUTHORIZED extends Exception {
     }
